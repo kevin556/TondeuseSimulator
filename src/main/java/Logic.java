@@ -1,18 +1,16 @@
 import enums.Directions;
 import enums.Instructions;
+import helpers.Helpers;
 
 public class Logic {
 
 	public static Garden garden;
 	public Mower[] mowerArray;
-	public String[] initialPosition;
 	public String[] actionsList;
-	
 	
 	
 	public Logic(Mower[] mower, String[] initialPosition, String[] actionsList ) {
 		this.mowerArray = mower;
-		this.initialPosition = initialPosition;
 		this.actionsList = actionsList;
 	}
 	
@@ -20,7 +18,7 @@ public class Logic {
 	public void mainLoop() throws Exception {
 		for(int i = 0 ; i < actionsList.length; i++ ) {
 			for ( int j = 0 ; j < actionsList[i].length();j++) {
-				Instructions currentInstruction = convertCharToInstruction(actionsList[i].charAt(j));
+				Instructions currentInstruction = Helpers.convertCharToInstruction(actionsList[i].charAt(j));
 				try {
 					// Actually we don't need to check if mower can rotate since there no movement involved.
 					if (currentInstruction == Instructions.A && isAllowedMove(mowerArray[i])) {
@@ -33,11 +31,6 @@ public class Logic {
 		}		
 	}
 	
-	// todo: put in helpers class
-	
-	private static Instructions convertCharToInstruction(char src) {
-		return Instructions.valueOf(Character.toString(src));
-	}
 	
 	private static boolean isAllowedMove(Mower mower) throws Exception {
 		int currentHeight = mower.getCurrentYPosition();

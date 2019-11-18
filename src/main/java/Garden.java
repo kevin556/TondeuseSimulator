@@ -7,12 +7,13 @@ public class Garden {
 
 	
 	public Garden ( int x,int y ) throws Exception {
-		if (this.height == 0 || this.witdth == 0) {
-			throw new IllegalArgumentException("height or width can't be equal to 0");
+		if (this.height <= 0 || this.witdth <= 0) {
+			throw new IllegalArgumentException("height or width can't be equal to 0 or negative");
 		}
+		
+		
 		this.height = y;
 		this.witdth = x;
-//		garden = new Boolean[this.witdth][this.height];
 	}
 	
 	public int getHeight() {
