@@ -1,18 +1,41 @@
 import enums.Directions;
 import enums.Instructions;
+import helpers.Helpers;
+import java.util.ArrayList;
+
 
 public class Logic {
 
-	public static Garden garden;
+	public Garden garden;
 	public Mower[] mowerArray;
-	public String[] initialPosition;
 	public String[] actionsList;
 	
+
+	public Logic(ArrayList<String> data ) throws Exception {
+		ArrayList<String> dataMowerArray = new ArrayList<String>();
+		ArrayList<String> dataActionsList = new ArrayList<String>();
+		
+		
+		for(int i = 1 ; i < data.size(); i++ ) {
+			if( i%2 == 0) {
+				dataMowerArray.add(data.get(i));
+			}
+			if( i%2 != 0) {
+				dataActionsList.add(data.get(i));
+			}
+		}
+		try {
+			garden = initGarden(data.get(0));
+			mowerArray = initMowerArray(dataMowerArray);
+			actionsList = dataActionsList.toArray(new String[dataActionsList.size()]);
+		}catch(Exception e) {
+			throw new Exception("Logic constructor error " + e.getStackTrace());
+		}
+	}
 	
 	
 	public Logic(Mower[] mower, String[] initialPosition, String[] actionsList ) {
 		this.mowerArray = mower;
-		this.initialPosition = initialPosition;
 		this.actionsList = actionsList;
 	}
 	
@@ -20,7 +43,7 @@ public class Logic {
 	public void mainLoop() throws Exception {
 		for(int i = 0 ; i < actionsList.length; i++ ) {
 			for ( int j = 0 ; j < actionsList[i].length();j++) {
-				Instructions currentInstruction = convertCharToInstruction(actionsList[i].charAt(j));
+				Instructions currentInstruction = Helpers.convertCharToInstruction(actionsList[i].charAt(j));
 				try {
 					// Actually we don't need to check if mower can rotate since there no movement involved.
 					if (currentInstruction == Instructions.A && isAllowedMove(mowerArray[i])) {
@@ -33,25 +56,41 @@ public class Logic {
 		}		
 	}
 	
-	// todo: put in helpers class
 	
-	private static Instructions convertCharToInstruction(char src) {
-		return Instructions.valueOf(Character.toString(src));
+	private Garden initGarden(String line) throws Exception {
+		String [] temp = line.split(" ");
+		return new Garden(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]));
 	}
 	
-	private static boolean isAllowedMove(Mower mower) throws Exception {
+	
+	private Mower[] initMowerArray(ArrayList<String> data) throws Exception {
+		Mower[] toReturn = new Mower[data.size()];
+		for(int i = 0 ; i< data.size(); i++ ) {
+			toReturn[i] = initMower(data.get(i));
+		}
+		return toReturn;
+	}
+	
+	
+	private Mower initMower(String line) throws Exception {
+		String[] temp = line.split(" ");
+		return new Mower(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]), Helpers.convertCharToDirections(temp[2]));
+	}
+	
+	
+	private boolean isAllowedMove(Mower mower) throws Exception {
 		int currentHeight = mower.getCurrentYPosition();
 		int currentWidth = mower.getCurrentXPosition();
 		Directions direction = mower.getCurrentDirection();
 		switch(direction) {
 		case NORTH:
-			return checkNorth(currentHeight, garden.getHeight());
+			return checkNorth(currentHeight, this.garden.getHeight());
 		case SOUTH:
-			return checkSouth(currentHeight, garden.getHeight());
+			return checkSouth(currentHeight, this.garden.getHeight());
 		case WEST:
-			return checkWest(currentWidth, garden.getWidth());
+			return checkWest(currentWidth, this.garden.getWidth());
 		case EST:
-			return checkEst(currentWidth, garden.getWidth());
+			return checkEst(currentWidth, this.garden.getWidth());
 		default:
 			throw new Exception("isAllowedMove: move not recognized");
 		}

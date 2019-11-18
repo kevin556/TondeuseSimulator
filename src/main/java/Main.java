@@ -1,41 +1,28 @@
-import java.io.FileReader;
 import helpers.DataGetter;
+import security.Security;
 
 
 public class Main {
-
-
-	FileReader fr;
-	
-	
+		
 	public static void main(String[]args) {
+		Logic logic;
 		System.out.println("hello world");
 		if(args.length > 1 || args.length == 0 ) {
-			System.out.println("erreur d'utilisation, fichier d'entrée manquant");
+			System.out.println("erreur d'utilisation:\n\targument1 : fichier d'entrée");
 		}
 		else {
-			if(secureInput(args[0])) {
+			if(Security.secureInput(args[0])) {
+				String path = args[0];
 				
+				DataGetter dg = new DataGetter(path);
+				try {
+					logic = new Logic(dg.readDataFromFile());
+					logic.mainLoop();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
 	}
-
-	
-	private static boolean secureInput(String src) {
-		System.out.println("actually it does nothing since there are no security rules involved but there should be some security "
-				+ "in here since user can give input");
-		return true;
-	}
-	
-	
-	private static String readFile(String path) {
-		DataGetter dg = new DataGetter(path);
-	
-	
-	}
-	
-	
-	
 
 }
