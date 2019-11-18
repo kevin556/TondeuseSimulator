@@ -1,14 +1,8 @@
 import helpers.DataGetter;
 import security.Security;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Main {
-	
-	static Garden garden;
-	
-	
 		
 	public static void main(String[]args) {
 		Logic logic;
@@ -21,17 +15,14 @@ public class Main {
 				String path = args[0];
 				
 				DataGetter dg = new DataGetter(path);
-				// initDataFromFile(args[0]);
-				// Mower[] mower, String[] actionsList
-				logic = new Logic(dg.readDataFromFile());
-				logic.mainLoop();
+				try {
+					logic = new Logic(dg.readDataFromFile());
+					logic.mainLoop();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
-		
 	}
-
-	
-	
-	
 
 }
