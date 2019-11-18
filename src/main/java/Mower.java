@@ -1,4 +1,5 @@
 import enums.Directions;
+import enums.Instructions;
 
 public class Mower {
 
@@ -19,7 +20,24 @@ public class Mower {
 	this.currentXPosition +  " y " + this.currentYPosition + " directions " + this.currentDirection);
 	}
 	
-	public void moveForward() {
+	
+	public void understandInstruction(Instructions instr) throws Exception {
+		switch(instr) {
+		case D:
+			this.rotateRight();
+			break;
+		case G:
+			this.rotateLeft();
+			break;
+		case A:
+			this.moveForward();
+			break;
+		default:
+			throw new Exception("understandInstruction : Instruction not recognized");
+		}
+	}
+	
+	public void moveForward() throws Exception {
 		switch(this.currentDirection) {
 			case NORTH:
 				this.moveUp();
@@ -34,7 +52,8 @@ public class Mower {
 				this.moveEst();
 				break;
 			default:
-				break;
+				throw new Exception("moveForward:  directions not recognized");
+				
 		}
 	}
 	
@@ -57,7 +76,7 @@ public class Mower {
 	
 // todo: refactor these two methods 
 	
-	public void rotateRight() {
+	public void rotateRight() throws Exception{
 		Directions d;
 		switch(this.currentDirection) {
 			case NORTH:
@@ -73,14 +92,13 @@ public class Mower {
 				d = Directions.NORTH;
 				break;
 			default :
-				d = this.currentDirection;
-				break;
+				throw new Exception("rotateRight: error when rotate");
 		}
 		this.currentDirection = d;
 	}
 	
 	
-	public void rotateLeft() {
+	public void rotateLeft() throws Exception{
 		Directions d;
 		switch(this.currentDirection) {
 			case NORTH:
@@ -96,8 +114,7 @@ public class Mower {
 				d = Directions.EST;
 				break;
 			default:
-				d = this.currentDirection;
-				break;
+				throw new Exception("rotateLeft: error when rotate");
 		}
 		this.currentDirection = d;
 	}
