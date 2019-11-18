@@ -3,9 +3,9 @@ import enums.Instructions;
 
 public class Mower {
 
-	Directions currentDirection;
-	int currentXPosition;
-	int currentYPosition;
+	private Directions currentDirection;
+	private int currentXPosition;
+	private int currentYPosition;
 	
 	
 	public Mower(int x, int y, Directions d){
@@ -15,13 +15,25 @@ public class Mower {
 	}
 	
 	
+	public int getCurrentXPosition() {
+		return this.currentXPosition;
+	}
+	
+	public int getCurrentYPosition() {
+		return this.currentYPosition;
+	}
+	
+	public Directions getCurrentDirection() {
+		return this.currentDirection;
+	}
+	
 	public void showMowerPositionAndDirections() {
 		System.out.println("mower " +
 	this.currentXPosition +  " y " + this.currentYPosition + " directions " + this.currentDirection);
 	}
 	
 	
-	public void understandInstruction(Instructions instr) throws Exception {
+	public void executeInstruction(Instructions instr) throws Exception {
 		switch(instr) {
 		case D:
 			this.rotateRight();

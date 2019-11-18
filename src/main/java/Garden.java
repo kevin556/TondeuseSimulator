@@ -2,15 +2,27 @@
 public class Garden {
 	
 	static Boolean[][] garden;
-	int height;
-	int witdth;
+	private int height;
+	private int witdth;
 
 	
-	public Garden ( int x,int y ) {
+	public Garden ( int x,int y ) throws Exception {
+		if (this.height == 0 || this.witdth == 0) {
+			throw new IllegalArgumentException("height or width can't be equal to 0");
+		}
 		this.height = y;
 		this.witdth = x;
-		garden = new Boolean[this.witdth][this.height];
+//		garden = new Boolean[this.witdth][this.height];
 	}
+	
+	public int getHeight() {
+		return this.height;
+	}
+	
+	public int getWidth() {
+		return this.witdth;
+	}
+	
 	
 	public void showGarden() {
 		for(int i = 0 ; i < garden.length; i++ ) {
