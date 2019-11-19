@@ -45,11 +45,20 @@ public class Logic {
 			for ( int j = 0 ; j < actionsList[i].length();j++) {
 				Instructions currentInstruction = EnumTypeConvertor.convertCharToInstruction(actionsList[i].charAt(j));
 				try {
-					mowerArray[i].executeInstruction(currentInstruction);	
+					// Actually we don't need to check if mower can rotate since there no movement involved.
+					if (currentInstruction == Instructions.A && helpers.LogicHelpers.isAllowedMove(mowerArray[i], garden)) {
+						mowerArray[i].executeInstruction(currentInstruction);	
+						System.out.println("mowerArray"+i + " : " + mowerArray[i].getCurrentXPosition() + " y " +
+								mowerArray[i].getCurrentYPosition() + " direction " + mowerArray[i].getCurrentDirection());
+					}
+					else {
+						mowerArray[i].executeInstruction(currentInstruction);	
+					}
 				} catch (Exception e) {
 					throw new Exception("error mainLoop parameters \n\tinstruction value: " + currentInstruction);
 				}
 			}
+			System.out.println(mowerArray[i].getCurrentXPosition() + " " + mowerArray[i].getCurrentYPosition() + " " + mowerArray[i].getCurrentDirection());
 			toReturn[i] = helpers.LogicHelpers.formateRes(mowerArray[i]);
 		}
 		return toReturn;
