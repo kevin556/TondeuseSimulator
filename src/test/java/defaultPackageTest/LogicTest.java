@@ -36,12 +36,23 @@ class LogicTest {
 	
 	@Test
 	void LogicConstructorTest(){
-		String[] correctActionList = new String[2];
+		String[] correctActionList = new String[6];
 		correctActionList[0] = "GAGAGAGAA";
 		correctActionList[1] = "AADAADADDA";
-		Mower[] mw = new Mower[2];
+		correctActionList[2] = "AAAAA";
+		correctActionList[3] = "DGDGDGDG";
+		correctActionList[4] = "DDDD";
+		correctActionList[5] = "GGGG";
+		
+		
+		Mower[] mw = new Mower[6];
 		mw[0] = new Mower(1, 2, Directions.N);
 		mw[1] = new Mower(3, 3, Directions.E);
+		mw[2] = new Mower(0, 0, Directions.N);
+		mw[3] = new Mower(0, 0, Directions.N);
+		mw[4] = new Mower(0, 0, Directions.N);
+		mw[5] = new Mower(0, 0, Directions.N);
+		
 		try {
 			Logic l = new Logic(liste);
 			Garden g = l.getGarden();
@@ -62,9 +73,14 @@ class LogicTest {
 	
 	@Test
 	void mainLoopTest() {
-		String[] correctRetour = new String[2];
+		String[] correctRetour = new String[6];
 		correctRetour[0] = "1 3 N";
 		correctRetour[1] = "5 1 E";
+		correctRetour[2] = "0 5 N";
+		correctRetour[3] = "0 0 N";
+		correctRetour[4] = "0 0 N";
+		correctRetour[5] = "0 0 N";
+		
 		try {
 			Logic l = new Logic(liste);
 			String[] retour = l.mainLoop();

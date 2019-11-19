@@ -28,6 +28,15 @@ class DataGetterTest {
 		rest.add("GAGAGAGAA");
 		rest.add("3 3 E");
 		rest.add("AADAADADDA");
+		rest.add("0 0 N");
+		rest.add("AAAAA");
+		rest.add("0 0 N");
+		rest.add("DGDGDGDG");
+		rest.add("0 0 N");
+		rest.add("DDDD");
+		rest.add("0 0 N");
+		rest.add("GGGG");
+		
 		try {
 			DataGetter dg = new DataGetter(filePath);
 			ArrayList<String> temp = dg.readDataFromFile();
