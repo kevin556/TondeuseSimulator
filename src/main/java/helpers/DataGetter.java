@@ -1,43 +1,53 @@
 package helpers;
 
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DataGetter {
 	
-	
 	String path;
-	Scanner sc;
+	BufferedReader reader;
 	
-	
-	public DataGetter(String path) {
+	public DataGetter(String path) throws FileNotFoundException{
 		this.path = path;
+		try {
+			reader = openFile();
+		} catch (FileNotFoundException e) {
+			throw new FileNotFoundException("DataGetter constructor error " + e);
+		}
 	}
 	
 	
-	private Scanner openFile() throws Exception {
+	private BufferedReader openFile() throws FileNotFoundException {
 		try {
-			sc = new Scanner(path);
-		}catch (Exception e) {
-			throw new Exception("openFile: error when opening file " + e.getStackTrace());
+			return new BufferedReader(new FileReader(path));
+		} catch(FileNotFoundException e) {
+			throw new FileNotFoundException("DataGetter openFile error " + e);
 		}
-		return sc;
+	
 	}
 	
 	
 	public ArrayList<String> readDataFromFile() throws Exception {
 		ArrayList<String> list = new ArrayList<>();
-		Scanner sc = openFile();
-		while(sc.hasNext()) {
-			list.add(sc.nextLine());
+		String line;
+		while((line = reader.readLine()) != null) {
+			list.add(line);
 		}
-		//todo: check if closeFile should be called here
 		closeFile();
 		return list;
 	}
 	
-	private void closeFile() {
-		sc.close();
+	private void closeFile() throws IOException{
+		try {
+			reader.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

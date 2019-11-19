@@ -83,13 +83,13 @@ public class Logic {
 		int currentWidth = mower.getCurrentXPosition();
 		Directions direction = mower.getCurrentDirection();
 		switch(direction) {
-		case NORTH:
+		case N:
 			return checkNorth(currentHeight, this.garden.getHeight());
-		case SOUTH:
+		case S:
 			return checkSouth(currentHeight, this.garden.getHeight());
-		case WEST:
+		case W:
 			return checkWest(currentWidth, this.garden.getWidth());
-		case EST:
+		case E:
 			return checkEst(currentWidth, this.garden.getWidth());
 		default:
 			throw new Exception("isAllowedMove: move not recognized");

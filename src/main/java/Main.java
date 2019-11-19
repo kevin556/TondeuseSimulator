@@ -12,9 +12,8 @@ public class Main {
 		else {
 			if(Security.secureInput(args[0])) {
 				String path = args[0];
-				
-				DataGetter dg = new DataGetter(path);
 				try {
+					DataGetter dg = new DataGetter(path);
 					logic = new Logic(dg.readDataFromFile());
 					logic.mainLoop();
 				} catch (Exception e) {
