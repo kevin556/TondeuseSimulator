@@ -3,7 +3,7 @@ package helpers;
 import enums.Directions;
 import enums.Instructions;
 
-public class Helpers {
+public class EnumTypeConvertor {
 
 
 	public static Instructions convertCharToInstruction(char src) {

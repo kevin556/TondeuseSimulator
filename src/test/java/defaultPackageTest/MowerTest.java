@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import Sys.Mower;
 import enums.Directions;
 import enums.Instructions;
-import helpers.Helpers;
+import helpers.EnumTypeConvertor;
 
 class MowerTest {
 
@@ -37,7 +37,7 @@ class MowerTest {
 	@Test
 	void initIncorrectMowerObject3() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Mower a = new Mower(0,0,Helpers.convertCharToDirections("G"));
+			Mower a = new Mower(0,0,EnumTypeConvertor.convertCharToDirections("G"));
 		});
 	}
 	
@@ -168,7 +168,7 @@ class MowerTest {
 	@Test
 	void executeInstructionTest() {
 		Mower m = new Mower(0,0,Directions.N);
-		Instructions instr = Helpers.convertCharToInstruction("A");
+		Instructions instr = EnumTypeConvertor.convertCharToInstruction("A");
 		m.executeInstruction(instr);
 		assertTrue(m.getCurrentDirection() == Directions.N);
 		assertTrue(m.getCurrentXPosition() == 0);
@@ -178,7 +178,7 @@ class MowerTest {
 	@Test
 	void executeInstructionTest1() {
 		Mower m = new Mower(0,0,Directions.N);
-		Instructions instr = Helpers.convertCharToInstruction("G");
+		Instructions instr = EnumTypeConvertor.convertCharToInstruction("G");
 		m.executeInstruction(instr);
 		assertTrue(m.getCurrentDirection() == Directions.W);
 		assertTrue(m.getCurrentXPosition() == 0);
@@ -188,7 +188,7 @@ class MowerTest {
 	@Test
 	void executeInstructionTest2() {
 		Mower m = new Mower(0,0,Directions.N);
-		Instructions instr = Helpers.convertCharToInstruction("D");
+		Instructions instr = EnumTypeConvertor.convertCharToInstruction("D");
 		m.executeInstruction(instr);
 		assertTrue(m.getCurrentDirection() == Directions.E);
 		assertTrue(m.getCurrentXPosition() == 0);
