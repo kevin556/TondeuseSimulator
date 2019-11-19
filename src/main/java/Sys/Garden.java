@@ -1,3 +1,5 @@
+package Sys;
+
 
 public class Garden {
 	
@@ -6,7 +8,7 @@ public class Garden {
 	private int witdth;
 
 	
-	public Garden ( int x,int y ) throws Exception {
+	public Garden ( int x,int y ) throws IllegalArgumentException {
 		if (this.height <= 0 || this.witdth <= 0) {
 			throw new IllegalArgumentException("height or width can't be equal to 0 or negative");
 		}		

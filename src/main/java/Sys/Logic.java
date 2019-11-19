@@ -1,6 +1,8 @@
+package Sys;
 import enums.Directions;
 import enums.Instructions;
 import java.util.ArrayList;
+
 import helpers.Helpers;
 
 public class Logic {
@@ -53,6 +55,7 @@ public class Logic {
 					throw new Exception("error mainLoop parameters \n\tinstruction value: " + currentInstruction);
 				}
 			}
+			System.out.println(mowerArray[i].getCurrentXPosition() + " " + mowerArray[i].getCurrentYPosition() + " " + mowerArray[i].getCurrentDirection());
 		}		
 	}
 	

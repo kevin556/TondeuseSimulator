@@ -1,8 +1,11 @@
 package defaultPackageTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import Sys.Garden;
 
 
 
@@ -10,17 +13,17 @@ class GardenTest {
 
 		
 	@Test
-	void shouldReturnAnException() {
-		Garden a = new Garden(0,0);
-		Exception e = new IllegalArgumentException("height or width can't be equal to 0 or negative");
-		
-		
+	void shouldReturnIllegalArgumentsException() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Garden a = new Garden(0,0);
+		});
 	}
 	
-	
-	@Test	
-	void test() {
-		fail("Not yet implemented");
+	@Test
+	void shouldReturnInitiatedGardenObject() {
+		Garden a = new Garden(1,2);
+		assertTrue(a.getHeight() == 1);
+		assertTrue(a.getWidth() == 2);
 	}
 
 }
