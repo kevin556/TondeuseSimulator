@@ -31,7 +31,7 @@ public class DataGetter {
 	}
 	
 	
-	public ArrayList<String> readDataFromFile() throws Exception {
+	public ArrayList<String> readDataFromFile() throws IOException {
 		ArrayList<String> list = new ArrayList<>();
 		String line;
 		while((line = reader.readLine()) != null) {

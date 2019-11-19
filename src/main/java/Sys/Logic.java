@@ -1,5 +1,4 @@
 package Sys;
-import enums.Directions;
 import enums.Instructions;
 import java.util.ArrayList;
 
@@ -7,56 +6,53 @@ import helpers.EnumTypeConvertor;
 
 public class Logic {
 
-	public Garden garden;
-	public Mower[] mowerArray;
-	public String[] actionsList;
+	private Garden garden;
+	private Mower[] mowerArray;
+	private String[] actionsList;
 	
-
-	public Logic(ArrayList<String> data ) throws Exception {
-		ArrayList<String> dataMowerArray = new ArrayList<String>();
-		ArrayList<String> dataActionsList = new ArrayList<String>();
-		
-		
-		for(int i = 1 ; i < data.size(); i++ ) {
-			if( i%2 == 0) {
-				dataMowerArray.add(data.get(i));
-			}
-			if( i%2 != 0) {
-				dataActionsList.add(data.get(i));
-			}
-		}
+	public Garden getGarden() {
+		return this.garden;
+	}
+	
+	public Mower[] getMowerArray() {
+		return this.mowerArray;
+	}
+	
+	public String[] getActionList() {
+		return this.actionsList;
+	}
+	
+	
+	public Logic(ArrayList<String> data ) throws Exception {			
 		try {
-			System.out.println("data.get(0) " + data.get(0).toString());
 			garden = helpers.LogicHelpers.initGarden(data.get(0));
-			mowerArray = helpers.LogicHelpers.initMowerArray(dataMowerArray);
-			actionsList = dataActionsList.toArray(new String[dataActionsList.size()]);
+			int arraySize = (data.size() - 1) /2;
+			ArrayList<ArrayList<String>> splittedFromData = helpers.LogicHelpers.parseAndSplitArrayList(data);
+			mowerArray = helpers.LogicHelpers.initMowerArray(splittedFromData.get(0));
+			actionsList = splittedFromData.get(1).toArray(new String[arraySize]);
 		}catch(Exception e) {
 			throw new Exception("Logic constructor error " + e.getStackTrace());
 		}
 	}
 	
+
 	
-	public Logic(Mower[] mower, String[] initialPosition, String[] actionsList ) {
-		this.mowerArray = mower;
-		this.actionsList = actionsList;
-	}
-	
-	
-	public void mainLoop() throws Exception {
-		for(int i = 0 ; i < actionsList.length; i++ ) {
+	public String[] mainLoop() throws Exception {
+		int actionListSize = actionsList.length;
+		String[] toReturn = new String[actionListSize];
+		
+		for(int i = 0 ; i < actionListSize; i++ ) {
 			for ( int j = 0 ; j < actionsList[i].length();j++) {
 				Instructions currentInstruction = EnumTypeConvertor.convertCharToInstruction(actionsList[i].charAt(j));
 				try {
-					// Actually we don't need to check if mower can rotate since there no movement involved.
-					if (currentInstruction == Instructions.A && helpers.LogicHelpers.isAllowedMove(mowerArray[i], garden)) {
-						mowerArray[i].executeInstruction(currentInstruction);						
-					}
+					mowerArray[i].executeInstruction(currentInstruction);	
 				} catch (Exception e) {
 					throw new Exception("error mainLoop parameters \n\tinstruction value: " + currentInstruction);
 				}
 			}
-			System.out.println(mowerArray[i].getCurrentXPosition() + " " + mowerArray[i].getCurrentYPosition() + " " + mowerArray[i].getCurrentDirection());
-		}		
+			toReturn[i] = helpers.LogicHelpers.formateRes(mowerArray[i]);
+		}
+		return toReturn;
 	}
 	
 	

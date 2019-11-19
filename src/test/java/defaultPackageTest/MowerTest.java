@@ -195,5 +195,34 @@ class MowerTest {
 		assertTrue(m.getCurrentYPosition() == 0);
 	}
 	
+	@Test
+	void equalTest() {
+		Mower m = new Mower(1,2,Directions.N);
+		Mower m2 = new Mower(1,2, Directions.N);
+		assertTrue(m.equals(m2));
+	}
+	
+	@Test
+	void equalTest2() {
+		Mower m = new Mower(1,2,Directions.N);
+		Mower m2 = new Mower(1,2, Directions.W);
+		assertFalse(m.equals(m2));
+	}
 
+	@Test
+	void equalTest3() {
+		Mower m = new Mower(1,2,Directions.N);
+		String s = "test";
+		assertFalse(m.equals(s));
+	}
+	
+	@Test
+	void equalTest4() {
+		Mower m = new Mower(1,2,Directions.N);
+		Mower m2 = new Mower(1,2,Directions.N);
+		Object a = m2;
+		assertTrue(m.equals(m2));
+		assertTrue(m.equals(a));
+	}
+	
 }

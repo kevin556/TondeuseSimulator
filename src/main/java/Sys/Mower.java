@@ -19,6 +19,21 @@ public class Mower {
 		this.currentYPosition = y;
 	}
 	
+	public boolean equals(Object o) {
+		if(o == this) {
+			return true;
+		}
+		if(!(o instanceof Mower)) {
+			return false;
+		}
+		Mower m = (Mower)o;
+		
+		return currentXPosition == m.getCurrentXPosition() && 
+				currentYPosition == m.getCurrentYPosition() &&
+				currentDirection == m.getCurrentDirection();
+		
+	}
+	
 	
 	public int getCurrentXPosition() {
 		return this.currentXPosition;

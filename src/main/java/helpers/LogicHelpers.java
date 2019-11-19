@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import Sys.Garden;
 import Sys.Mower;
-import enums.Directions;
 
 public class LogicHelpers {
 
@@ -73,6 +72,37 @@ public class LogicHelpers {
 		return toReturn;
 	}
 	
+	
+	
+	public static ArrayList<ArrayList<String>> parseAndSplitArrayList(ArrayList<String> data) {
+		ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
+		
+		ArrayList<String> dataMowerArray = new ArrayList<String>();
+		ArrayList<String> dataActionsList = new ArrayList<String>();
+		
+		for(int i = 1 ; i < data.size(); i++ ) {
+			if( i%2 != 0) {
+				dataMowerArray.add(data.get(i));
+			}
+			if( i%2 == 0) {
+				dataActionsList.add(data.get(i));
+			}
+		}
+		toReturn.add(dataMowerArray);
+		toReturn.add(dataActionsList);
+		return toReturn;
+	}
+	
+	
+	public static String formateRes(Mower mower) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(mower.getCurrentXPosition());
+		sb.append(" ");
+		sb.append(mower.getCurrentYPosition());
+		sb.append(" ");
+		sb.append(mower.getCurrentDirection());
+		return sb.toString();
+	}
 	
 	
 }
