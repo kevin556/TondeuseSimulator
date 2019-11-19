@@ -3,8 +3,15 @@ package helpers;
 import enums.Directions;
 import enums.Instructions;
 
-public class EnumTypeConvertor {
+/***
+ * 
+ * @author kevin556
+ *
+ *	This class contains methods used to convert string to enums based data.
+ */
 
+public class EnumTypeConvertor {
+		
 
 	public static Instructions convertCharToInstruction(char src) {
 		return Instructions.valueOf(Character.toString(src));

@@ -6,11 +6,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/***
+ * 
+ * @author kevin556
+ *	this class is used to read the data from a file
+ *
+ */
+
 public class DataGetter {
 	
 	String path;
 	BufferedReader reader;
 	
+	
+	/***
+	 * @param path
+	 * @throws FileNotFoundException
+	 * 
+	 * This constructor check if the file given in the path exist
+	 * 
+	 */
 	public DataGetter(String path) throws FileNotFoundException{
 		this.path = path;
 		try {
@@ -20,7 +35,13 @@ public class DataGetter {
 		}
 	}
 	
-	
+	/***
+	 * @param path
+	 * @throws FileNotFoundException
+	 * 
+	 * This method is used to get the BufferedReader in order to read the file
+	 * 
+	 */
 	private BufferedReader openFile() throws FileNotFoundException {
 		try {
 			return new BufferedReader(new FileReader(path));
@@ -30,7 +51,13 @@ public class DataGetter {
 	
 	}
 	
-	
+	/***
+	 * @param path
+	 * @throws FileNotFoundException
+	 * 
+	 * This method is used to read the line from the BufferedReader
+	 * 
+	 */
 	public ArrayList<String> readDataFromFile() throws IOException {
 		ArrayList<String> list = new ArrayList<>();
 		String line;
@@ -41,6 +68,13 @@ public class DataGetter {
 		return list;
 	}
 	
+	/***
+	 * @param path
+	 * @throws FileNotFoundException
+	 * 
+	 * This method is used to close the BufferedReader
+	 * 
+	 */
 	private void closeFile() throws IOException{
 		try {
 			reader.close();

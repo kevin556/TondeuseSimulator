@@ -6,23 +6,68 @@ import Sys.Garden;
 import Sys.Mower;
 
 public class LogicHelpers {
+	
+	/***
+	 * 
+	 * @param currentXPosition
+	 * @param gardenWidth
+	 * @return
+	 * 
+	 * check if est movement is possible
+	 */
 
 	private static boolean checkEst(int currentXPosition, int gardenWidth) {
 		return currentXPosition+1 <= gardenWidth;
 	}
 	
+	/***
+	 * 
+	 * @param currentXPosition
+	 * @param gardenWidth
+	 * @return
+	 * 
+	 * check if west movement is possible
+	 */
+	
 	private static boolean checkWest(int currentXPosition, int gardenWidth) {
 		return currentXPosition-1 >= 0;
 	}
+	
+	/***
+	 * 
+	 * @param currentXPosition
+	 * @param gardenWidth
+	 * @return
+	 * 
+	 * check if north movement is possible
+	 */
 	
 	private static boolean checkNorth(int currentYPosition, int gardenHeight) {
 		return currentYPosition+1 <= gardenHeight;
 	}
 	
+	/***
+	 * 
+	 * @param currentXPosition
+	 * @param gardenWidth
+	 * @return
+	 * 
+	 * check if south movement is possible
+	 */
+	
 	private static boolean checkSouth(int currentYPosition, int gardenHeight) {
 		return currentYPosition-1 >= 0;
  	}
 	
+	
+	/***
+	 * 
+	 * @param line
+	 * @return Garden
+	 * @throws IllegalArgumentException
+	 * 
+	 * Init a garden with the parameter given as a line
+	 */
 
 	public static Garden initGarden(String line) throws IllegalArgumentException {
 		String [] temp = line.split(" ");
@@ -34,6 +79,14 @@ public class LogicHelpers {
 		
 	}
 	
+	/***
+	 * 
+	 * @param data
+	 * @return
+	 * @throws Exception
+	 * 
+	 * Init an array of Mower object, the initial mowers position and directions are given as an arrayList of String
+	 */
 	
 	public static Mower[] initMowerArray(ArrayList<String> data) throws Exception {
 		Mower[] toReturn = new Mower[data.size()];
@@ -43,13 +96,29 @@ public class LogicHelpers {
 		return toReturn;
 	}
 	
-	
+	/***
+	 * 
+	 * @param line
+	 * @return
+	 * @throws Exception
+	 * 
+	 *  return a mower object according the parameter given in the parameter
+	 */
 	public static Mower initMower(String line) throws Exception {
 		String[] temp = line.split(" ");
 		return new Mower(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]), EnumTypeConvertor.convertCharToDirections(temp[2]));
 	}
 	
 	
+	/***
+	 * 
+	 * @param mower
+	 * @param garden
+	 * @return boolean
+	 * @throws Exception
+	 * 
+	 * check if a movement is allowed
+	 */
 
 	public static boolean isAllowedMove(Mower mower, Garden garden) throws Exception {
 		Boolean toReturn = false; 
@@ -73,6 +142,16 @@ public class LogicHelpers {
 	}
 	
 	
+	/***
+	 * 
+	 * @param data
+	 * @return ArrayList<ArrayList<String>>
+	 * 
+	 * return an arrayList of an ArrayList: 
+	 * first arrayList of the global arrayList contains the Mower data
+	 * second arrayList of the gloval arrayList contains the action data
+	 * 
+	 */
 	
 	public static ArrayList<ArrayList<String>> parseAndSplitArrayList(ArrayList<String> data) {
 		ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
@@ -93,7 +172,13 @@ public class LogicHelpers {
 		return toReturn;
 	}
 	
-	
+	/***
+	 * 
+	 * @param mower
+	 * @return String
+	 * 
+	 * return the correct formated final position of a mower
+	 */
 	public static String formateRes(Mower mower) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(mower.getCurrentXPosition());

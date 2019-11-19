@@ -22,6 +22,15 @@ public class Logic {
 		return this.actionsList;
 	}
 	
+	/***
+	 * 
+	 * @param data
+	 * @throws Exception
+	 * 
+	 * This method init the Logic Object
+	 * It's used to initiate the object needed to run the mainLoop part
+	 * 
+	 */
 	
 	public Logic(ArrayList<String> data ) throws Exception {			
 		try {
@@ -35,7 +44,15 @@ public class Logic {
 		}
 	}
 	
-
+	
+/***
+ * 
+ * @return String[] it return an array of the position where the mowers are.
+ * @throws Exception
+ * 
+ * This function is the core of the program. It's used to make the mower move by understanding the instruction given in the inputFile
+ * 
+ */
 	
 	public String[] mainLoop() throws Exception {
 		int actionListSize = actionsList.length;
