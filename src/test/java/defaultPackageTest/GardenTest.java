@@ -11,7 +11,7 @@ import Sys.Garden;
 
 class GardenTest {
 
-		
+	
 	@Test
 	void shouldReturnIllegalArgumentsException() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -60,6 +60,12 @@ class GardenTest {
 		Garden a = new Garden(12,23);
 		assertTrue(a.getWidth() == 12);
 		assertTrue(a.getHeight() == 23);
+	}
+	
+	@Test
+	void shouldTestToString() {
+		Garden a = new Garden(1,1);
+		assertTrue(a.toString().equals("width 1 height 1"));
 	}
 	
 

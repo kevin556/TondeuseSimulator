@@ -1,7 +1,15 @@
 package security;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import helpers.LogicHelpers;
+
 public class Security {
 
+	public static Logger logger = LogManager.getLogger(Security.class);
+
+	
 /***
  * 
  * @param src

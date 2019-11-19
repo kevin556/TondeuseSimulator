@@ -225,4 +225,10 @@ class MowerTest {
 		assertTrue(m.equals(a));
 	}
 	
+	@Test
+	void toStringTest() {
+		Mower m = new Mower(1,2,Directions.N);
+		assertTrue(m.toString().equals("X:1 Y:2 Direction:N"));
+	}
+	
 }

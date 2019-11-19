@@ -6,6 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 /***
  * 
  * @author kevin556
@@ -17,6 +21,8 @@ public class DataGetter {
 	
 	String path;
 	BufferedReader reader;
+	public static Logger logger = LogManager.getLogger(DataGetter.class);
+	
 	
 	
 	/***
@@ -27,6 +33,9 @@ public class DataGetter {
 	 * 
 	 */
 	public DataGetter(String path) throws FileNotFoundException{
+		if(logger.isDebugEnabled()) {
+			logger.debug("DataGetter : path ", path );
+		}
 		this.path = path;
 		try {
 			reader = openFile();
@@ -43,6 +52,9 @@ public class DataGetter {
 	 * 
 	 */
 	private BufferedReader openFile() throws FileNotFoundException {
+		if(logger.isDebugEnabled()) {
+			logger.debug("openFile : path ", path );
+		}
 		try {
 			return new BufferedReader(new FileReader(path));
 		} catch(FileNotFoundException e) {
@@ -62,7 +74,14 @@ public class DataGetter {
 		ArrayList<String> list = new ArrayList<>();
 		String line;
 		while((line = reader.readLine()) != null) {
+			if(logger.isDebugEnabled()) {
+				logger.debug("readDataFromFile  -> line readed ", line );
+			}
+		
 			list.add(line);
+		}
+		if(logger.isDebugEnabled()) {
+			logger.debug("readDataFromFile  -> list returned ", list );
 		}
 		closeFile();
 		return list;
@@ -78,7 +97,11 @@ public class DataGetter {
 	private void closeFile() throws IOException{
 		try {
 			reader.close();
+			if(logger.isDebugEnabled()) {
+				logger.debug("closeFile  -> reader closed");
+			}
 		} catch (IOException e) {
+			logger.error("closeFile");
 			e.printStackTrace();
 		}
 	}
