@@ -251,5 +251,31 @@ class LogicHelpersTest {
 		Mower m = new Mower(1, 2, Directions.N);
 		assertTrue(helpers.LogicHelpers.formateRes(m).equals("1 2 N"));
 	}
+	
+	@Test
+	void optimizePartTest() {
+		String path = "DDDDA";
+		assertTrue(helpers.LogicHelpers.optimizeInstructions(path).contentEquals("A"));
+	}
+	
+	@Test
+	void optimizePartTest2() {
+		String path = "GGGGA";
+		assertTrue(helpers.LogicHelpers.optimizeInstructions(path).equals("A"));
+	}
+	
+	@Test
+	void optimizePartTest3() {
+		String path = "DDA";
+		assertTrue(helpers.LogicHelpers.optimizeInstructions(path).equals("DDA"));
+	}
+	
+	@Test
+	void optimizePartTest4() {
+		String path = "DADADADA";
+		assertTrue(helpers.LogicHelpers.optimizeInstructions(path).equals("DADADADA"));
+	}
+
+	
 
 }

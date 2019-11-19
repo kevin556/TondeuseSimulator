@@ -164,12 +164,25 @@ public class LogicHelpers {
 				dataMowerArray.add(data.get(i));
 			}
 			if( i%2 == 0) {
-				dataActionsList.add(data.get(i));
+				dataActionsList.add(optimizeInstructions(data.get(i)));
 			}
-		}
+		}		
 		toReturn.add(dataMowerArray);
 		toReturn.add(dataActionsList);
 		return toReturn;
+	}
+	
+	/***
+	 * 
+	 * @param path
+	 * @return String
+	 * 
+	 * this method optimize the instruction data actually when the mower do a full turn. it removes it from the instruction, since no movement is involved
+	 */
+	public static String optimizeInstructions(String path) {
+		path = path.replaceAll("D{4}", "");
+		path = path.replaceAll("G{4}", "");
+		return path;
 	}
 	
 	/***

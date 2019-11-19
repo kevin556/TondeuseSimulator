@@ -41,8 +41,8 @@ class LogicTest {
 		correctActionList[1] = "AADAADADDA";
 		correctActionList[2] = "AAAAA";
 		correctActionList[3] = "DGDGDGDG";
-		correctActionList[4] = "DDDD";
-		correctActionList[5] = "GGGG";
+		correctActionList[4] = "";
+		correctActionList[5] = "";
 		
 		
 		Mower[] mw = new Mower[6];
