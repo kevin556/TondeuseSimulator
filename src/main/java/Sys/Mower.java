@@ -10,7 +10,10 @@ public class Mower {
 	private int currentYPosition;
 	
 	
-	public Mower(int x, int y, Directions d){
+	public Mower(int x, int y, Directions d) throws IllegalArgumentException{
+		if(x <= 0 || y <= 0 ) {
+			throw new IllegalArgumentException("Mower constructor: x or y can't be equal to 0 or negative");
+		}
 		this.currentDirection = d;
 		this.currentXPosition = x;
 		this.currentYPosition = y;
@@ -35,7 +38,7 @@ public class Mower {
 	}
 	
 	
-	public void executeInstruction(Instructions instr) throws Exception {
+	public void executeInstruction(Instructions instr) throws IllegalArgumentException {
 		switch(instr) {
 		case D:
 			this.rotateRight();
@@ -47,11 +50,11 @@ public class Mower {
 			this.moveForward();
 			break;
 		default:
-			throw new Exception("understandInstruction : Instruction not recognized");
+			throw new IllegalArgumentException("understandInstruction : Instruction not recognized");
 		}
 	}
 	
-	public void moveForward() throws Exception {
+	public void moveForward() throws IllegalArgumentException {
 		switch(this.currentDirection) {
 			case N:
 				this.moveUp();
@@ -66,7 +69,7 @@ public class Mower {
 				this.moveEst();
 				break;
 			default:
-				throw new Exception("moveForward:  directions not recognized");
+				throw new IllegalArgumentException("moveForward:  directions not recognized");
 				
 		}
 	}
@@ -76,11 +79,15 @@ public class Mower {
 	}
 	
 	public void moveDown(){
-		this.currentYPosition--;
+		if(this.currentYPosition > 0) {
+			this.currentYPosition--;
+		}
 	}
 	
 	public void moveWest() {
-		this.currentXPosition--;
+		if(this.currentXPosition > 0) {
+			this.currentXPosition--;
+		}
 	}
 	
 	public void moveEst() {
@@ -90,7 +97,7 @@ public class Mower {
 	
 // todo: refactor these two methods 
 	
-	public void rotateRight() throws Exception{
+	public void rotateRight() throws IllegalArgumentException{
 		Directions d;
 		switch(this.currentDirection) {
 			case N:
@@ -106,13 +113,13 @@ public class Mower {
 				d = Directions.N;
 				break;
 			default :
-				throw new Exception("rotateRight: error when rotate");
+				throw new IllegalArgumentException("rotateRight: error when rotate");
 		}
 		this.currentDirection = d;
 	}
 	
 	
-	public void rotateLeft() throws Exception{
+	public void rotateLeft() throws IllegalArgumentException{
 		Directions d;
 		switch(this.currentDirection) {
 			case N:
@@ -128,7 +135,7 @@ public class Mower {
 				d = Directions.E;
 				break;
 			default:
-				throw new Exception("rotateLeft: error when rotate");
+				throw new IllegalArgumentException("rotateLeft: error when rotate");
 		}
 		this.currentDirection = d;
 	}
