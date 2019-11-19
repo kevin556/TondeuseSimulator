@@ -6,7 +6,6 @@ public class Main {
 		
 	public static void main(String[]args) {
 		Logic logic;
-		System.out.println("hello world");
 		if(args.length > 1 || args.length == 0 ) {
 			System.out.println("erreur d'utilisation:\n\targument1 : fichier d'entrée");
 		}

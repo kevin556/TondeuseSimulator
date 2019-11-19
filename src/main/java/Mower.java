@@ -51,16 +51,16 @@ public class Mower {
 	
 	public void moveForward() throws Exception {
 		switch(this.currentDirection) {
-			case NORTH:
+			case N:
 				this.moveUp();
 				break;
-			case SOUTH:
+			case S:
 				this.moveDown();
 				break;
-			case WEST:
+			case W:
 				this.moveWest();
 				break;
-			case EST:
+			case E:
 				this.moveEst();
 				break;
 			default:
@@ -91,17 +91,17 @@ public class Mower {
 	public void rotateRight() throws Exception{
 		Directions d;
 		switch(this.currentDirection) {
-			case NORTH:
-				d = Directions.EST;
+			case N:
+				d = Directions.E;
 				break;
-			case EST:
-				d = Directions.SOUTH;
+			case E:
+				d = Directions.S;
 				break;
-			case SOUTH:
-				d = Directions.WEST;
+			case S:
+				d = Directions.W;
 				break;
-			case WEST:
-				d = Directions.NORTH;
+			case W:
+				d = Directions.N;
 				break;
 			default :
 				throw new Exception("rotateRight: error when rotate");
@@ -113,17 +113,17 @@ public class Mower {
 	public void rotateLeft() throws Exception{
 		Directions d;
 		switch(this.currentDirection) {
-			case NORTH:
-				d = Directions.WEST;
+			case N:
+				d = Directions.W;
 				break;
-			case EST:
-				d = Directions.NORTH;
+			case E:
+				d = Directions.N;
 				break;
-			case WEST:
-				d = Directions.SOUTH;
+			case W:
+				d = Directions.S;
 				break;
-			case SOUTH:
-				d = Directions.EST;
+			case S:
+				d = Directions.E;
 				break;
 			default:
 				throw new Exception("rotateLeft: error when rotate");

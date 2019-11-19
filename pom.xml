@@ -6,9 +6,35 @@
   <name>projet-tondeuse</name>
   
   <properties>
+    <maven.compiler.source>12</maven.compiler.source>
   	<maven.compiler.version>12</maven.compiler.version>
   	<maven.compiler.target>12</maven.compiler.target>
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+  
+  <dependencies>
+  	<dependency>
+    	<groupId>org.junit.jupiter</groupId>
+	    <artifactId>junit-jupiter-engine</artifactId>
+    	<version>5.1.0</version>
+	    <scope>test</scope>
+	</dependency>
+  </dependencies>
+
+
+	<build>
+		<plugins>
+				<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+		
+		</plugins>
+	
+	</build>
   
 </project>

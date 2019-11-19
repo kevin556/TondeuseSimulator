@@ -1,8 +1,7 @@
 import enums.Directions;
 import enums.Instructions;
-import helpers.Helpers;
 import java.util.ArrayList;
-
+import helpers.Helpers;
 
 public class Logic {
 
@@ -25,6 +24,7 @@ public class Logic {
 			}
 		}
 		try {
+			System.out.println("data.get(0) " + data.get(0).toString());
 			garden = initGarden(data.get(0));
 			mowerArray = initMowerArray(dataMowerArray);
 			actionsList = dataActionsList.toArray(new String[dataActionsList.size()]);
