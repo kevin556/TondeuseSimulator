@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import Sys.Mower;
 import enums.Directions;
+import enums.Instructions;
+import helpers.Helpers;
 
 class MowerTest {
 
@@ -21,9 +23,24 @@ class MowerTest {
 	@Test
 	void initIncorrectMowerObject() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			Mower a = new Mower(1,0,Directions.E);
+			Mower a = new Mower(-1,0,Directions.E);
 		});
 	}
+	
+	@Test
+	void initIncorrectMowerObject1() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Mower a = new Mower(0,-1,Directions.E);
+		});
+	}	
+	
+	@Test
+	void initIncorrectMowerObject3() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			Mower a = new Mower(0,0,Helpers.convertCharToDirections("G"));
+		});
+	}
+	
 	
 	@Test
 	void rotateLeftTest() {
@@ -82,23 +99,101 @@ class MowerTest {
 	@Test
 	void moveWestTest2() {
 		Mower m = new Mower(0,0,Directions.N);
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			m.moveWest();	
-		});
+		assertTrue(m.getCurrentXPosition() == 0);
 	}
 	
 	@Test
 	void moveDownTest2() {
 		Mower m = new Mower(0,0,Directions.N);
-		Assertions.assertThrows(IllegalArgumentException.class, () -> {
-			m.moveDown();	
-		});
+		assertTrue(m.getCurrentYPosition() == 0);
 	}
 	
 	
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void moveForwardNorthTest() {
+		Mower m = new Mower(0,0,Directions.N);
+		m.moveForward();
+		assertTrue(m.getCurrentDirection() == Directions.N);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 1);
 	}
+	
+	@Test
+	void moveForwardEstTest() {
+		Mower m = new Mower(0,0,Directions.E);
+		m.moveForward();
+		assertTrue(m.getCurrentDirection() == Directions.E);
+		assertTrue(m.getCurrentXPosition() == 1);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
+	@Test
+	void moveForwardWestTest() {
+		Mower m = new Mower(1,0,Directions.W);
+		m.moveForward();
+		assertTrue(m.getCurrentDirection() == Directions.W);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
+	@Test
+	void moveForwardSouthTest() {
+		Mower m = new Mower(0,1,Directions.S);
+		m.moveForward();
+		assertTrue(m.getCurrentDirection() == Directions.S);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
+	@Test
+	void moveForwardSouthTest2() {
+		Mower m = new Mower(0,0,Directions.S);
+		m.moveForward();
+		assertTrue(m.getCurrentDirection() == Directions.S);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
+	
+	@Test
+	void moveForwardWestTest2() {
+		Mower m = new Mower(0,0,Directions.W);
+		m.moveForward();
+		assertTrue(m.getCurrentDirection() == Directions.W);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
+	
+	@Test
+	void executeInstructionTest() {
+		Mower m = new Mower(0,0,Directions.N);
+		Instructions instr = Helpers.convertCharToInstruction("A");
+		m.executeInstruction(instr);
+		assertTrue(m.getCurrentDirection() == Directions.N);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 1);
+	}
+	
+	@Test
+	void executeInstructionTest1() {
+		Mower m = new Mower(0,0,Directions.N);
+		Instructions instr = Helpers.convertCharToInstruction("G");
+		m.executeInstruction(instr);
+		assertTrue(m.getCurrentDirection() == Directions.W);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
+	@Test
+	void executeInstructionTest2() {
+		Mower m = new Mower(0,0,Directions.N);
+		Instructions instr = Helpers.convertCharToInstruction("D");
+		m.executeInstruction(instr);
+		assertTrue(m.getCurrentDirection() == Directions.E);
+		assertTrue(m.getCurrentXPosition() == 0);
+		assertTrue(m.getCurrentYPosition() == 0);
+	}
+	
 
 }

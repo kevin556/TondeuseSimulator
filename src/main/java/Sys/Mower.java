@@ -11,7 +11,7 @@ public class Mower {
 	
 	
 	public Mower(int x, int y, Directions d) throws IllegalArgumentException{
-		if(x <= 0 || y <= 0 ) {
+		if(x < 0 || y < 0 ) {
 			throw new IllegalArgumentException("Mower constructor: x or y can't be equal to 0 or negative");
 		}
 		this.currentDirection = d;
@@ -31,12 +31,6 @@ public class Mower {
 	public Directions getCurrentDirection() {
 		return this.currentDirection;
 	}
-	
-	public void showMowerPositionAndDirections() {
-		System.out.println("mower " +
-	this.currentXPosition +  " y " + this.currentYPosition + " directions " + this.currentDirection);
-	}
-	
 	
 	public void executeInstruction(Instructions instr) throws IllegalArgumentException {
 		switch(instr) {

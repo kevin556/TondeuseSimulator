@@ -3,17 +3,16 @@ package Sys;
 
 public class Garden {
 	
-	static Boolean[][] garden;
 	private int height;
 	private int witdth;
 
 	
-	public Garden ( int x,int y ) throws IllegalArgumentException {
-		if (this.height <= 0 || this.witdth <= 0) {
+	public Garden ( int width ,int height ) throws IllegalArgumentException {
+		if (height <= 0 || width <= 0) {
 			throw new IllegalArgumentException("height or width can't be equal to 0 or negative");
 		}		
-		this.height = y;
-		this.witdth = x;
+		this.height = height;
+		this.witdth = width;
 	}
 	
 	public int getHeight() {
@@ -23,15 +22,5 @@ public class Garden {
 	public int getWidth() {
 		return this.witdth;
 	}
-	
-	
-	public void showGarden() {
-		for(int i = 0 ; i < garden.length; i++ ) {
-			for ( int j = 0 ; j < garden[0].length; j++ ) {
-				System.out.print(garden[i][j] + " | ");
-			}
-			System.out.println();
-		}
-	}
-	
+
 }
