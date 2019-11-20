@@ -2,7 +2,7 @@
 
 A simple Mower modelisation system written in java.
 
-It use maven as software project management, Junit5 for the testing path and log4j2 for the loggin part.
+It use maven as software project management, Junit5 for the testing and log4j2 for the loggin part.
 
 
 ## usage
