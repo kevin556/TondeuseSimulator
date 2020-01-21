@@ -24,9 +24,7 @@ public class Mower {
 	 * Mower constructor, return a mower object or throw an exception when x or y are negative
 	 */
 	public Mower(int x, int y, Directions d) throws IllegalArgumentException{
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower constructor", "x ", x , " y ", y , "Directions", d);
-		}
+		logger.debug("Mower constructor", "x ", x , " y ", y , "Directions", d);
 		if(x < 0 || y < 0 ) {
 			throw new IllegalArgumentException("Mower constructor: x or y can't be equal to 0 or negative");
 		}
@@ -98,9 +96,7 @@ public class Mower {
 	 */
 	public void executeInstruction(Instructions instr) throws IllegalArgumentException {
 		
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower executeInstruction", "instr", instr);
-		}
+		logger.debug("Mower executeInstruction", "instr", instr);
 		switch(instr) {
 		case D:
 			this.rotateRight();
@@ -124,9 +120,7 @@ public class Mower {
 	 * move the Mower according the direction it's pointed to
 	 */
 	public void moveForward() throws IllegalArgumentException {
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower moveForward", "currentDirections", this.currentDirection);
-		}
+		logger.debug("Mower moveForward", "currentDirections", this.currentDirection);
 		switch(this.currentDirection) {
 			case N:
 				this.moveUp();
@@ -183,10 +177,8 @@ public class Mower {
  * make the mower rotate right
  */
 	public void rotateRight() throws IllegalArgumentException{
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower rotateRight", "currentDirections", this.currentDirection);
-		}
-		
+		logger.debug("Mower rotateRight", "currentDirections", this.currentDirection);
+
 		Directions d;
 		switch(this.currentDirection) {
 			case N:
@@ -204,9 +196,7 @@ public class Mower {
 			default :
 				throw new IllegalArgumentException("rotateRight: error when rotate");
 		}
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower rotateRight", "returned value ", d);
-		}
+		logger.debug("Mower rotateRight", "returned value ", d);
 		this.currentDirection = d;
 	}
 	
@@ -217,9 +207,7 @@ public class Mower {
  * make the mower rotate left
  */
 	public void rotateLeft() throws IllegalArgumentException{
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower rotateLeft", "currentDirections", this.currentDirection);
-		}
+		logger.debug("Mower rotateLeft", "currentDirections", this.currentDirection);
 		Directions d;
 		switch(this.currentDirection) {
 			case N:
@@ -238,9 +226,8 @@ public class Mower {
 				throw new IllegalArgumentException("rotateLeft: error when rotate");
 		}
 		
-		if(logger.isDebugEnabled()) {
-			logger.debug("Mower rotateLeft", "returned value ", d);
-		}
+		logger.debug("Mower rotateLeft", "returned value ", d);
+
 	
 		this.currentDirection = d;
 	}

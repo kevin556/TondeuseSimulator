@@ -18,8 +18,7 @@ import helpers.DataGetter;
 
 class LogicTest {
 	static ArrayList<String> liste;
-	
-	
+
 	@BeforeAll
 	static void before(){
 		DataGetter dg;
@@ -36,22 +35,24 @@ class LogicTest {
 	
 	@Test
 	void LogicConstructorTest(){
-		String[] correctActionList = new String[6];
+		String[] correctActionList = new String[7];
 		correctActionList[0] = "GAGAGAGAA";
 		correctActionList[1] = "AADAADADDA";
 		correctActionList[2] = "AAAAA";
 		correctActionList[3] = "DGDGDGDG";
 		correctActionList[4] = "";
 		correctActionList[5] = "";
-		
-		
-		Mower[] mw = new Mower[6];
+		correctActionList[6] = "GAAA";
+
+		Mower[] mw = new Mower[7];
 		mw[0] = new Mower(1, 2, Directions.N);
 		mw[1] = new Mower(3, 3, Directions.E);
 		mw[2] = new Mower(0, 0, Directions.N);
 		mw[3] = new Mower(0, 0, Directions.N);
 		mw[4] = new Mower(0, 0, Directions.N);
 		mw[5] = new Mower(0, 0, Directions.N);
+		mw[6] = new Mower(0, 0, Directions.N);
+
 		
 		try {
 			Logic l = new Logic(liste);
@@ -73,17 +74,28 @@ class LogicTest {
 	
 	@Test
 	void mainLoopTest() {
-		String[] correctRetour = new String[6];
+		String[] correctRetour = new String[7];
 		correctRetour[0] = "1 3 N";
 		correctRetour[1] = "5 1 E";
 		correctRetour[2] = "0 5 N";
 		correctRetour[3] = "0 0 N";
 		correctRetour[4] = "0 0 N";
 		correctRetour[5] = "0 0 N";
+		correctRetour[6] = "0 0 W";
 		
 		try {
 			Logic l = new Logic(liste);
 			String[] retour = l.mainLoop();
+			System.out.println("correctRetour " + correctRetour);
+			for(String retour2: correctRetour ){
+				System.out.println("retour " + retour2);
+			}
+
+			for(String retour3: retour) {
+				System.out.println("retour3 " + retour3);
+			}
+
+			System.out.println("retour " + retour);
 			assertTrue(Arrays.deepEquals(correctRetour, retour));
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();

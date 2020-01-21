@@ -1,7 +1,9 @@
 package helpers;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import Sys.SimulationData;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,9 +25,7 @@ public class LogicHelpers {
 	 */
 
 	private static boolean checkEst(int currentXPosition, int gardenWidth) {
-		if(logger.isDebugEnabled()) {
-			logger.debug("checkEst ", "currentXposition ", currentXPosition, "gardenWidth ", gardenWidth );
-		}		
+		logger.debug("checkEst ", "currentXposition ", currentXPosition, "gardenWidth ", gardenWidth );
 		return currentXPosition+1 <= gardenWidth;
 	}
 	
@@ -39,41 +39,35 @@ public class LogicHelpers {
 	 */
 	
 	private static boolean checkWest(int currentXPosition, int gardenWidth) {
-		if(logger.isDebugEnabled()) {
-			logger.debug("checkWest ", "currentXposition ", currentXPosition, "gardenWidth ", gardenWidth );
-		}		
+		logger.debug("checkWest ", "currentXposition ", currentXPosition, "gardenWidth ", gardenWidth );
 		return currentXPosition-1 >= 0;
 	}
 	
 	/***
 	 * 
-	 * @param currentXPosition
-	 * @param gardenWidth
+	 * @param currentYPosition
+	 * @param gardenHeight
 	 * @return
 	 * 
 	 * check if north movement is possible
 	 */
 	
 	private static boolean checkNorth(int currentYPosition, int gardenHeight) {
-		if(logger.isDebugEnabled()) {
-			logger.debug("checkNorth ", "currentYPosition ", currentYPosition, "gardenHeight ", gardenHeight );
-		}		
+		logger.debug("checkNorth ", "currentYPosition ", currentYPosition, "gardenHeight ", gardenHeight );
 		return currentYPosition+1 <= gardenHeight;
 	}
 	
 	/***
 	 * 
-	 * @param currentXPosition
-	 * @param gardenWidth
+	 * @param currentYPosition
+	 * @param gardenHeight
 	 * @return
 	 * 
 	 * check if south movement is possible
 	 */
 	
 	private static boolean checkSouth(int currentYPosition, int gardenHeight) {
-		if(logger.isDebugEnabled()) {
-			logger.debug("checkSouth ", "currentYPosition ", currentYPosition, "gardenHeight ", gardenHeight );
-		}		
+		logger.debug("checkSouth ", "currentYPosition ", currentYPosition, "gardenHeight ", gardenHeight );
 		return currentYPosition-1 >= 0;
  	}
 	
@@ -88,14 +82,9 @@ public class LogicHelpers {
 	 */
 
 	public static Garden initGarden(String line) throws IllegalArgumentException {
-		if(logger.isDebugEnabled()) {
-			logger.debug("initGarden ", "line ", line);
-		}
+		logger.debug("initGarden ", "line ", line);
 		String [] temp = line.split(" ");
-		if(logger.isDebugEnabled()) {
-			logger.debug("initGarden ", "temp ", temp);
-		}
-		
+		logger.debug("initGarden ", "temp ", temp);
 		if(temp.length == 2) {
 			return new Garden(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]));
 		} else {
@@ -114,9 +103,7 @@ public class LogicHelpers {
 	 */
 	
 	public static Mower[] initMowerArray(ArrayList<String> data) throws Exception {
-		if(logger.isDebugEnabled()) {
-			logger.debug("initMowerArray ", "data ", data);
-		}
+		logger.debug("initMowerArray ", "data ", data);
 		Mower[] toReturn = new Mower[data.size()];
 		for(int i = 0 ; i< data.size(); i++ ) {
 			toReturn[i] = initMower(data.get(i));
@@ -133,9 +120,7 @@ public class LogicHelpers {
 	 *  return a mower object according the parameter given in the parameter
 	 */
 	public static Mower initMower(String line) throws Exception {
-		if(logger.isDebugEnabled()) {
-			logger.debug("initMower ", "line ", line);
-		}
+		logger.debug("initMower ", "line ", line);
 		String[] temp = line.split(" ");
 		return new Mower(Integer.parseInt(temp[0]),Integer.parseInt(temp[1]), EnumTypeConvertor.convertCharToDirections(temp[2]));
 	}
@@ -152,10 +137,7 @@ public class LogicHelpers {
 	 */
 
 	public static boolean isAllowedMove(Mower mower, Garden garden) throws Exception {
-		if(logger.isDebugEnabled()) {
-			logger.debug("isAllowedMove ", "mower ", mower, "garden", garden);
-		}
-		
+		logger.debug("isAllowedMove ", "mower ", mower, "garden", garden);
 		Boolean toReturn = false; 
 		switch(mower.getCurrentDirection()) {
 		case N:
@@ -173,10 +155,7 @@ public class LogicHelpers {
 		default:
 			throw new Exception("isAllowedMove: move not recognized");
 		}
-		if(logger.isDebugEnabled()) {
-			logger.debug("isAllowedMove", "toReturn ", toReturn);
-		}
-
+		logger.debug("isAllowedMove", "toReturn ", toReturn);
 		
 		return toReturn;
 	}
@@ -188,16 +167,15 @@ public class LogicHelpers {
 	 * @return ArrayList<ArrayList<String>>
 	 * 
 	 * return an arrayList of an ArrayList: 
-	 * first arrayList of the global arrayList contains the Mower data
+	 * the first arrayList contains the global arrayList contains the Mower data
 	 * second arrayList of the global arrayList contains the action data
 	 * 
 	 */
-	
 	public static ArrayList<ArrayList<String>> parseAndSplitArrayList(ArrayList<String> data) {
-		ArrayList<ArrayList<String>> toReturn = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> toReturn = new ArrayList<>();
 		
-		ArrayList<String> dataMowerArray = new ArrayList<String>();
-		ArrayList<String> dataActionsList = new ArrayList<String>();
+		ArrayList<String> dataMowerArray = new ArrayList<>();
+		ArrayList<String> dataActionsList = new ArrayList<>();
 		
 		for(int i = 1 ; i < data.size(); i++ ) {
 			if( i%2 != 0) {
@@ -211,14 +189,17 @@ public class LogicHelpers {
 		toReturn.add(dataActionsList);
 		return toReturn;
 	}
-	
-	/***
-	 * 
-	 * @param path
-	 * @return String
-	 * 
-	 * this method optimize the instruction data actually when the mower do a full turn. it removes it from the instruction, since no movement is involved
-	 */
+
+
+
+
+		/***
+         *
+         * @param path
+         * @return String
+         *
+         * this method optimize the instruction data actually when the mower do a full turn. it removes it from the instruction, since no movement is involved
+         */
 	public static String optimizeInstructions(String path) {
 		path = path.replaceAll("D{4}", "");
 		path = path.replaceAll("G{4}", "");

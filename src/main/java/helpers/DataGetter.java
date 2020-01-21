@@ -33,9 +33,7 @@ public class DataGetter {
 	 * 
 	 */
 	public DataGetter(String path) throws FileNotFoundException{
-		if(logger.isDebugEnabled()) {
-			logger.debug("DataGetter : path ", path );
-		}
+		logger.debug("DataGetter : path ", path );
 		this.path = path;
 		try {
 			reader = openFile();
@@ -45,16 +43,13 @@ public class DataGetter {
 	}
 	
 	/***
-	 * @param path
 	 * @throws FileNotFoundException
 	 * 
 	 * This method is used to get the BufferedReader in order to read the file
 	 * 
 	 */
 	private BufferedReader openFile() throws FileNotFoundException {
-		if(logger.isDebugEnabled()) {
-			logger.debug("openFile : path ", path );
-		}
+		logger.debug("openFile : path ", path );
 		try {
 			return new BufferedReader(new FileReader(path));
 		} catch(FileNotFoundException e) {
@@ -64,7 +59,6 @@ public class DataGetter {
 	}
 	
 	/***
-	 * @param path
 	 * @throws FileNotFoundException
 	 * 
 	 * This method is used to read the line from the BufferedReader
@@ -74,21 +68,15 @@ public class DataGetter {
 		ArrayList<String> list = new ArrayList<>();
 		String line;
 		while((line = reader.readLine()) != null) {
-			if(logger.isDebugEnabled()) {
-				logger.debug("readDataFromFile  -> line readed ", line );
-			}
-		
+			logger.debug("readDataFromFile  -> line readed ", line );
 			list.add(line);
 		}
-		if(logger.isDebugEnabled()) {
-			logger.debug("readDataFromFile  -> list returned ", list );
-		}
+		logger.debug("readDataFromFile  -> list returned ", list );
 		closeFile();
 		return list;
 	}
 	
 	/***
-	 * @param path
 	 * @throws FileNotFoundException
 	 * 
 	 * This method is used to close the BufferedReader
@@ -97,9 +85,7 @@ public class DataGetter {
 	private void closeFile() throws IOException{
 		try {
 			reader.close();
-			if(logger.isDebugEnabled()) {
-				logger.debug("closeFile  -> reader closed");
-			}
+			logger.debug("closeFile  -> reader closed");
 		} catch (IOException e) {
 			logger.error("closeFile");
 			e.printStackTrace();

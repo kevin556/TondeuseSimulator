@@ -36,6 +36,8 @@ class DataGetterTest {
 		rest.add("DDDD");
 		rest.add("0 0 N");
 		rest.add("GGGG");
+		rest.add("0 0 N");
+		rest.add("GAAA");
 		
 		try {
 			DataGetter dg = new DataGetter(filePath);

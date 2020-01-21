@@ -21,10 +21,8 @@ public class Garden {
 	 */
 	
 	public Garden ( int width ,int height ) throws IllegalArgumentException {
-		if( logger.isDebugEnabled()) {
-			logger.debug("Garden constructor ", "width", width, "height", height);
-		}
-		
+		logger.debug("Garden constructor ", "width", width, "height", height);
+
 		if (height <= 0 || width <= 0) {
 			throw new IllegalArgumentException("height or width can't be equal to 0 or negative");
 		}		
